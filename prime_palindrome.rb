@@ -1,18 +1,9 @@
 require_relative 'prime_series'
-
-def palindrome?(str)
-  str == str.reverse
-end
+require_relative 'palindrome_filter'
 
 primes = PrimeSeries.new
-prime_palindromes = []
+filter = PalindromeFilter.new(primes)
 
-while prime_palindromes.length < 10
-  n = primes.generate
-
-  if palindrome?(n.to_s)
-    prime_palindromes << n
-  end
-end
+prime_palindromes = (1..10).map { filter.generate_palindrome }
 
 p prime_palindromes
