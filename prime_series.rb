@@ -8,11 +8,7 @@ class PrimeSeries
   def generator
     @generator ||= Fiber.new do
       Fiber.yield(2)
-      n = 3
-      loop do
-        Fiber.yield(n) if prime?(n)
-        n += 2
-      end
+      3.step(by: 2) { |n| Fiber.yield(n) if prime?(n) }
     end
   end
 
