@@ -3,17 +3,17 @@ class PalindromeFilter
     @generator = generator
   end
 
-  def generate_palindrome
-    filter.resume
+  def take(n)
+    filter.take(n)
   end
 
   private
 
   def filter
-    @filter ||= Fiber.new do
+    @filter ||= Enumerator.new do |yielder|
       loop do
         n = @generator.generate
-        Fiber.yield(n) if palindrome?(n)
+        yielder.yield(n) if palindrome?(n)
       end
     end
   end
