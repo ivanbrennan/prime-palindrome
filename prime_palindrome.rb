@@ -1,7 +1,7 @@
 require_relative 'prime_series'
-require_relative 'palindrome_filter'
+require_relative 'palindrome'
 
-primes = PrimeSeries.new
-filter = PalindromeFilter.new(primes)
+primes = PrimeSeries.generator
+filter = Palindrome.filter(primes).lazy
 
-p filter.take(10)
+p filter.select { |n| n.to_s.size > 1 }.take(10).force

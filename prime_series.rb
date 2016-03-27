@@ -1,14 +1,10 @@
-class PrimeSeries
-  def generate
-    generator.resume
-  end
-
-  private
+module PrimeSeries
+  extend self
 
   def generator
-    @generator ||= Fiber.new do
-      Fiber.yield(2)
-      3.step(by: 2) { |n| Fiber.yield(n) if prime?(n) }
+    Enumerator.new do |yielder|
+      yielder.yield(2)
+      3.step(by: 2) { |n| yielder.yield(n) if prime?(n) }
     end
   end
 
