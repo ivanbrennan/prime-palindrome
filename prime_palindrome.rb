@@ -4,4 +4,4 @@ require_relative 'palindrome'
 primes = PrimeSeries.generator
 filter = Palindrome.filter(primes).lazy
 
-p filter.select { |n| n.to_s.size > 1 }.take(10).force
+p filter.select { |n| n.to_s.size > 1 }.first(10)
